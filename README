@@ -31,7 +31,7 @@ installs the crontab only if required.
 
 In order to keep this process running, the makefile must be called
 regularly. For this purpose an additional crontab entry starts the
-make crontab procedure one time per minute.
+make crontab procedure every minute.
 
 The crontab-* files may contain special variables:
     @NAME@ - file name without the 'crontab-' prefix

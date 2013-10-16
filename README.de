@@ -32,7 +32,7 @@ dateien vorliegen und installiert die neue Crontab nur bei Bedarf.
 
 Um diesen Prozess am Laufen zu halten, muss das Makefile regelmäßig
 aufgerufen werden. Zu diesem Zweck sorgt ein zusätzlicher Crontab-Eintrag
-dafür, dass der make-crontab Vorgang einmal pro Minute gestartet wird.
+dafür, dass der make-crontab Vorgang jede Minute gestartet wird.
 
 Die crontab-* Dateien können spezielle Variablen enthalten:
     @NAME@ - Dateiname ohne den Prefix 'crontab-'

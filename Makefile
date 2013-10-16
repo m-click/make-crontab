@@ -20,7 +20,7 @@
 #  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-VERSION = 2.0
+VERSION = 2.1
 RESULT = crontab
 SOURCES = $(wildcard crontab-*)
 REAL_PWD = $(shell pwd)
@@ -42,7 +42,7 @@ $(RESULT): $(SOURCES) Makefile
 	    echo "#________________________________________" ; \
 	    echo "#+++ crontab of $$NAME +++" ; \
 	    echo "#" ; \
-	    sed "s,@NAME@,$$NAME,g; s,@PWD@,$(REAL_PWD),g" < "$$FILE" ; \
+	    sed "s,@NAME@,$$NAME,g; s,@PWD@,$(REAL_PWD),g; s,^\$$,#," < "$$FILE" ; \
 	done \
 	) > '$@'
 	# install crontab
