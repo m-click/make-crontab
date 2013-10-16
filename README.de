@@ -6,16 +6,16 @@
 
 Authors:  Volker Grabsch, Matthias Pohl
 Homepage: http://oss.m-click.ws/index.php?area=make_crontab
-Benötigt: GNU Make
+BenÃ¶tigt: GNU Make
 
 
-make-crontab wird für die Crontabverwaltung auf Servern mit mehreren
+make-crontab wird fÃ¼r die Crontabverwaltung auf Servern mit mehreren
 Webapplikationen eingesetzt, wobei jede Applikation ihre eigenen
-Cronjobinformationen editieren kann. Das System ermöglicht es, dass
-dafür nur ein System-User (in der Regel der Apache User) benötigt wird.
+Cronjobinformationen editieren kann. Das System ermÃ¶glicht es, dass
+dafÃ¼r nur ein System-User (in der Regel der Apache User) benÃ¶tigt wird.
 
-Die Applikationen können ihre eigenen Cronjobinformationen editieren
-und auch neue Cronjobs hinzufügen ohne die Informationen der anderen
+Die Applikationen kÃ¶nnen ihre eigenen Cronjobinformationen editieren
+und auch neue Cronjobs hinzufÃ¼gen ohne die Informationen der anderen
 Applikationen zu beeinflussen.
 
 Im Verzeichnis make-crontab befindet sich ein Makefile und mehrere
@@ -23,22 +23,22 @@ Content Dateien mit den Cronjobinformationen der einzelnen
 Applikationen. Diese Content Dateien sind nach dem Namensschema
 'crontab-app1', 'crontab-app2' benannt.
 
-Die Contentdateien können von den Applikationen direkt geschrieben werden.
+Die Contentdateien kÃ¶nnen von den Applikationen direkt geschrieben werden.
 
 Wird das Makefile aufgerufen, vereinigt es alle Dateien der Form
-crontab-* zu einer Crontabdatei, die dann als Crontab für den System-User
-installiert wird. Das Makefile überprüft, ob Änderungen an den Content-
+crontab-* zu einer Crontabdatei, die dann als Crontab fÃ¼r den System-User
+installiert wird. Das Makefile Ã¼berprÃ¼ft, ob Ã„nderungen an den Content-
 dateien vorliegen und installiert die neue Crontab nur bei Bedarf.
 
-Um diesen Prozess am Laufen zu halten, muss das Makefile regelmäßig
-aufgerufen werden. Zu diesem Zweck sorgt ein zusätzlicher Crontab-Eintrag
-dafür, dass der make-crontab Vorgang jede Minute gestartet wird.
+Um diesen Prozess am Laufen zu halten, muss das Makefile regelmÃ¤ÃŸig
+aufgerufen werden. Zu diesem Zweck sorgt ein zusÃ¤tzlicher Crontab-Eintrag
+dafÃ¼r, dass der make-crontab Vorgang jede Minute gestartet wird.
 
-Die crontab-* Dateien können spezielle Variablen enthalten:
+Die crontab-* Dateien kÃ¶nnen spezielle Variablen enthalten:
     @NAME@ - Dateiname ohne den Prefix 'crontab-'
     @PWD@  - absoluter Pfad zum make-crontab-Verzeichnis
 
 Steht zum Beispiel in der Datei 'crontab-app2':
     0 8 * * *  /usr/lib/@NAME@/mein-wichtiges-script.sh
-Dann wird in der endgültigen Crontab stehen:
+Dann wird in der endgÃ¼ltigen Crontab stehen:
     0 8 * * *  /usr/lib/app2/mein-wichtiges-script.sh
