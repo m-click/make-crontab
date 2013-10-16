@@ -20,7 +20,7 @@
 #  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-VERSION = 2.1
+VERSION = 2.2
 RESULT = crontab
 SOURCES = $(wildcard crontab-*)
 REAL_PWD = $(shell pwd)
@@ -35,7 +35,7 @@ $(RESULT): $(SOURCES) Makefile
 	echo "#________________________________________" ; \
 	echo "#+++ update crontab +++" ; \
 	echo "#" ; \
-	echo "* * * * *  cd '$(REAL_PWD)' && '$(MAKE)' >/dev/null" ; \
+	echo "* * * * *  [ -d '$(REAL_PWD)' ] && cd '$(REAL_PWD)' && '$(MAKE)' >/dev/null" ; \
 	for FILE in $(SOURCES) ; do \
 	    NAME=`echo "$$FILE" | sed "s,^crontab-,,"` ; \
 	    echo "#" ; \
