@@ -1,0 +1,38 @@
+    make-crontab
+    ============
+
+    Viele Cronjob-Dateien, aber nur ein System-User
+
+
+Authors:  Volker Grabsch, Matthias Pohl
+Homepage: http://oss.m-click.ws/index.php?area=make_crontab
+Benötigt: GNU Make
+
+
+make-crontab wird für die Crontabverwaltung auf Servern mit mehreren
+Webapplikationen eingesetzt, wobei jede Applikation ihre eigenen
+Cronjobinformationen editieren kann. Das System ermöglicht es, dass
+dafür nur ein System-User (in der Regel der Apache User) benötigt wird.
+
+Die Applikationen können ihre eigenen Cronjobinformationen editieren
+und auch neue Cronjobs hinzufügen ohne die Informationen der anderen
+Applikationen zu beeinflussen.
+
+Im Verzeichnis make-crontab befindet sich ein Makefile und mehrere
+Content Dateien mit den Cronjobinformationen der einzelnen
+Applikationen. Diese Content Dateien sind nach dem Namensschema
+'crontab-app1', 'crontab-app2' benannt.
+
+Die Contentdateien können von den Applikationen direkt geschrieben werden.
+
+Wird das Makefile aufgerufen, vereinigt es alle Dateien der Form
+crontab-* zu einer Crontabdatei, die dann als Crontab für den Apache
+User installiert wird. Das Makefile überprüft, ob Änderungen an den
+Contentdateien vorliegen und installiert die neue Crontab nur bei Bedarf.
+
+Um diesen Prozess am Laufen zu halten, muss das Makefile regelmäßig
+aufgerufen werden. Zu diesem Zweck befindet sich neben den Content-
+dateien der Applikationen noch eine Datei mit Cronjobinformationen für
+das Makefile selbst, crontab-make. Auch diese Information wird in die
+Crontab eingebunden und startet den make-crontab Vorgang jeweils einmal
+pro Minute.
