@@ -17,7 +17,7 @@ system user (usually the apache user) to do this job.
 The applications can not only edit their own cronjob informationen but
 also add new cronjobs without mixing up the croninfo with the other apps.
 
-In the directory make crontab a makefile and some content files
+In the directory make-crontab a makefile and some content files
 containing the cronjob informationen of each application are located.
 These content files are named according to the name pattern
 'crontab-app1', 'crontab-app2'.
@@ -26,11 +26,18 @@ The content files can be written by the applications directly.
 
 If the makefile is called, it merges all files of the pattern crontab-*
 to one crontab file, which will then be installed as the crontab for the
-apache user. The makefile check for updates on the content files and
+system user. The makefile checks for updates on the content files and
 installs the crontab only if required.
 
 In order to keep this process running, the makefile must be called
-regularly. For this purpose another file with cronjob informationen for
-the makefile crontab-make is located beside the content files of the
-applications. This information is also merged into the crontab and starts
-the make crontab procedure one time per minute.
+regularly. For this purpose an additional crontab entry starts the
+make crontab procedure one time per minute.
+
+The crontab-* files may contain special variables:
+    @NAME@ - file name without the 'crontab-' prefix
+    @PWD@  - absolute path to the make crontab directory
+
+Assume the file 'crontab-app2' contains:
+    0 8 * * *  /usr/lib/@NAME@/my-important-script.sh
+Then the final crontab will contain:
+    0 8 * * *  /usr/lib/app2/my-important-script.sh

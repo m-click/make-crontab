@@ -26,13 +26,19 @@ Applikationen. Diese Content Dateien sind nach dem Namensschema
 Die Contentdateien können von den Applikationen direkt geschrieben werden.
 
 Wird das Makefile aufgerufen, vereinigt es alle Dateien der Form
-crontab-* zu einer Crontabdatei, die dann als Crontab für den Apache
-User installiert wird. Das Makefile überprüft, ob Änderungen an den
-Contentdateien vorliegen und installiert die neue Crontab nur bei Bedarf.
+crontab-* zu einer Crontabdatei, die dann als Crontab für den System-User
+installiert wird. Das Makefile überprüft, ob Änderungen an den Content-
+dateien vorliegen und installiert die neue Crontab nur bei Bedarf.
 
 Um diesen Prozess am Laufen zu halten, muss das Makefile regelmäßig
-aufgerufen werden. Zu diesem Zweck befindet sich neben den Content-
-dateien der Applikationen noch eine Datei mit Cronjobinformationen für
-das Makefile selbst, crontab-make. Auch diese Information wird in die
-Crontab eingebunden und startet den make-crontab Vorgang jeweils einmal
-pro Minute.
+aufgerufen werden. Zu diesem Zweck sorgt ein zusätzlicher Crontab-Eintrag
+dafür, dass der make-crontab Vorgang einmal pro Minute gestartet wird.
+
+Die crontab-* Dateien können spezielle Variablen enthalten:
+    @NAME@ - Dateiname ohne den Prefix 'crontab-'
+    @PWD@  - absoluter Pfad zum make-crontab-Verzeichnis
+
+Steht zum Beispiel in der Datei 'crontab-app2':
+    0 8 * * *  /usr/lib/@NAME@/mein-wichtiges-script.sh
+Dann wird in der endgültigen Crontab stehen:
+    0 8 * * *  /usr/lib/app2/mein-wichtiges-script.sh
